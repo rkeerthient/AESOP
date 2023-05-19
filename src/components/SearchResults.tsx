@@ -57,7 +57,6 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
   ): any => {
     const productResults = verticalKeyToResults["products"]
       ?.results as unknown as Result<Product>[];
-    console.log(productResults);
 
     return productResults ? (
       <div

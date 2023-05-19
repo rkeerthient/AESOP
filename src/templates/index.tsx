@@ -79,7 +79,6 @@ const Index: Template<TemplateRenderProps> = ({
   __meta,
 }) => {
   const { _site, dm_directoryChildren } = document;
-  console.log(JSON.stringify(dm_directoryChildren));
 
   var sortedChildren = dm_directoryChildren.sort(function (a: any, b: any) {
     var a = a.name,
