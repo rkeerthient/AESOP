@@ -69,7 +69,7 @@ const Product_desc = ({ document }: any) => {
             <div>
               <ul className="flex justify-start space-x-6">
                 {c_sizes.map((item: any, index: any) => (
-                  <li className="gap-2 flex">
+                  <li className="gap-2 flex" key={index}>
                     <input type="radio" value={item} name="gender" />
                     <div>{item} mL</div>
                   </li>
@@ -81,10 +81,12 @@ const Product_desc = ({ document }: any) => {
         </>
       )}
 
-      <div className="w-full text-center bg-gray-800 text-white py-4 px-8">
-        Add to your cart — {price.currencyCode}
-        {price.value}
-      </div>
+      {price && (
+        <div className="w-full text-center bg-gray-800 text-white py-4 px-8">
+          Add to your cart — {price.currencyCode}
+          {price.value}
+        </div>
+      )}
       <div className="flex space-x-2 items-center">
         <HeartIcon className="h-5 w-5" />
         <div>Save to cabinet</div>
