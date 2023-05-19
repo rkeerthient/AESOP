@@ -30,9 +30,7 @@ type Props = {
 };
 const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
   const searchActions = useSearchActions();
-  let query = new URLSearchParams(window.location.search).get("query");
   useEffect(() => {
-    query && searchActions.setQuery(query);
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
