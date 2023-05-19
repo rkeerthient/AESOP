@@ -1,6 +1,6 @@
 import * as React from "react";
 import "../index.css";
-import { 
+import {
   GetPath,
   Template,
   TemplateProps,
@@ -9,11 +9,15 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import { 
+import {
   SearchHeadlessProvider,
-  provideHeadless
-} from "@yext/search-headless-react"; 
-import { FilterSearch, VerticalResults, ResultsCount } from "@yext/search-ui-react";
+  provideHeadless,
+} from "@yext/search-headless-react";
+import {
+  FilterSearch,
+  VerticalResults,
+  ResultsCount,
+} from "@yext/search-ui-react";
 import { Location } from "../types/search/locations";
 import MapboxMap from "../components/MapboxMap";
 import MapPin from "../components/MapPin";
@@ -29,7 +33,11 @@ export const getPath: GetPath<TemplateProps> = () => {
   return `locator`;
 };
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({relativePrefixToRoot, path, document}): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+  relativePrefixToRoot,
+  path,
+  document,
+}): HeadConfig => {
   return {
     title: document.name,
     charset: "UTF-8",
@@ -44,76 +52,79 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({relativePrefi
       {
         type: "link",
         attributes: {
-          rel: 'icon',
-          type: 'image/x-icon',
-          href: Favicon
+          rel: "icon",
+          type: "image/x-icon",
+          href: Favicon,
         },
-      }
+      },
     ],
   };
 };
 
 const searcher = provideHeadless({
-  apiKey: (import.meta.env.YEXT_PUBLIC_SEARCH_API_KEY),
-  experienceKey: "turtlehead-tacos-locator",
   verticalKey: "locations",
+  apiKey: "9c5eb5d3f4c1c8e6b32bfa12fbedb1d3",
+  experienceKey: "search",
   locale: "en",
 });
 
 const Locator: Template<TemplateRenderProps> = ({
   relativePrefixToRoot,
-    path,
-    document,
-    __meta
-  }) => {
+  path,
+  document,
+  __meta,
+}) => {
   const { _site } = document;
-  
+
   return (
     <>
-      <PageLayout _site={_site} templateData={{__meta, document}}>
+      <PageLayout _site={_site} templateData={{ __meta, document }}>
         <SearchHeadlessProvider searcher={searcher}>
-            <div className="w-full h-screen flex flex-col max-h-screen">
+          <div className="w-full h-screen flex flex-col max-h-screen">
             <div className="flex flex-row w-full h-full overflow-y-auto">
-                <div className="w-1/3 h-full bg-slate-50 border-r border-slate-300 shadow-md overflow-auto">
+              <div className="w-1/3 h-full bg-slate-50 border-r border-slate-300 shadow-md overflow-auto">
                 <div className="sticky top-0 z-20 bg-slate-50 border-b border-slate-300">
-                    <h3 className="m-2 font-semibold text-slate-900">
-                      Find a Location
-                    </h3>
-                    <FilterSearch
+                  <h3 className="m-2 font-semibold text-slate-900">
+                    Find a Location
+                  </h3>
+                  <FilterSearch
                     customCssClasses={{
-                        filterSearchContainer: "m-2",
+                      filterSearchContainer: "m-2",
                     }}
                     searchOnSelect={true}
                     searchFields={[
-                        {
+                      {
                         entityType: "location",
                         fieldApiName: "builtin.location",
-                        },
+                      },
                     ]}
-                    />
-                    <ResultsCount
+                  />
+                  <ResultsCount
                     customCssClasses={{ resultsCountContainer: "mx-2 my-0" }}
-                    />
+                  />
                 </div>
                 <VerticalResults<Location>
-                    displayAllOnNoResults={false}
-                    customCssClasses={{
+                  displayAllOnNoResults={false}
+                  customCssClasses={{
                     verticalResultsContainer:
-                        "flex flex-col divide-y divide-slate-300 overflow-auto",
-                    }}
-                    CardComponent={LocationCard}
+                      "flex flex-col divide-y divide-slate-300 overflow-auto",
+                  }}
+                  CardComponent={LocationCard}
                 />
-                </div>
-                <div className="w-full h-full bg-blue-200">
+              </div>
+              <div className="w-full h-full bg-blue-200">
                 <MapboxMap<Location>
-                    mapboxAccessToken={import.meta.env.YEXT_PUBLIC_MAPBOX_API_KEY}
-                    getCoordinate={(location) =>
-                    location.rawData.yextDisplayCoordinate}
-                    PinComponent={MapPin}
+                  mapboxAccessToken={
+                    "pk.eyJ1Ijoic3VubnlrZWVydGhpIiwiYSI6ImNsNWh5ZGt3czAyejUzY3A3Y3pvZ2E0bTgifQ.TNHfh1HL0LwTzLxs2TOaBQ"
+                  }
+                  getCoordinate={(location) =>
+                    location.rawData.yextDisplayCoordinate
+                  }
+                  PinComponent={MapPin}
                 />
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </SearchHeadlessProvider>
       </PageLayout>
     </>

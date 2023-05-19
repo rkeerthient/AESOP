@@ -103,10 +103,9 @@ const Index: Template<TemplateRenderProps> = ({
       <PageLayout _site={_site} templateData={{ __meta, document }}>
         <div className="centered-container">
           <BreadCrumbs name="Home" baseUrl={relativePrefixToRoot} />
+
           <div className="section space-y-6 px-10">
-            <h1 className="text-left text-2xl">
-              Contractor Locations Directory
-            </h1>
+            <h1 className="text-left text-2xl">AESOP Locations Directory</h1>
             <p className="text-normal font-semibold text-left">
               {dm_directoryChildren &&
                 dm_directoryChildren.flat().reduce(function (a: any, b: any) {

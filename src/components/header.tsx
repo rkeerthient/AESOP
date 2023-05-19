@@ -4,9 +4,9 @@ import { Image, Link } from "@yext/pages/components";
 
 const navigation = [
   { name: "Home", href: "/index.html" },
-  { name: "About", href: "/about" },
-  { name: "Menu", href: "/menu" },
-  { name: "Locator", href: "/locator" },
+  { name: "Products", href: "/products-grid" },
+  { name: "Store locator", href: "/locator" },
+  { name: "Locations Directory", href: "/root.html" },
 ];
 
 export default function Header({ _site }) {

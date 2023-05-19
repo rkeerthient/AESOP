@@ -30,7 +30,7 @@ const Product_desc = ({ document }: any) => {
         <>
           <div className="py-2">
             <div className="  text-gray-800 font-bold">Suited to</div>
-            <div>{c_suitedTo.toString().replace(",", " ,")}</div>
+            <div>{c_suitedTo.toString().replace(",", ", ")}</div>
           </div>
           <hr className="border border-gray-300" />
         </>
@@ -39,7 +39,7 @@ const Product_desc = ({ document }: any) => {
         <>
           <div className="py-2">
             <div className="text-sm text-gray-800 font-bold">Skin feel</div>
-            <div>{c_skinFeel.toString().replace(",", " ,")}</div>
+            <div>{c_skinFeel.toString().replace(",", ", ")}</div>
           </div>
           <hr className="border border-gray-300" />
         </>
@@ -48,7 +48,7 @@ const Product_desc = ({ document }: any) => {
         <>
           <div className="py-2">
             <div className="  text-gray-800 font-bold">Aroma</div>
-            <div>{c_aroma.toString().replace(",", " ,")}</div>
+            <div>{c_aroma.toString().replace(",", ", ")}</div>
           </div>
           <hr className="border border-gray-300" />
         </>
@@ -57,7 +57,7 @@ const Product_desc = ({ document }: any) => {
         <>
           <div className="py-2">
             <div className="  text-gray-800 font-bold">Key ingredients</div>
-            <div>{c_ingredients.toString().replace(",", " ,")}</div>
+            <div>{c_ingredients.toString().replace(",", ", ")}</div>
           </div>
           <hr className="border border-gray-300" />
         </>
