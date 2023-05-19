@@ -6,7 +6,7 @@ const navigation = [
   { name: "Home", href: "/index.html" },
   { name: "Products", href: "/products-grid" },
   { name: "Store locator", href: "/locator" },
-  { name: "Locations Directory", href: "/root.html" },
+  { name: "Locations Directory", href: "/index.html" },
 ];
 
 export default function Header({ _site }) {
