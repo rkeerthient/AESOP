@@ -17,7 +17,7 @@ import {
   VerticalResults,
 } from "@yext/search-ui-react";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CardComponent } from "@yext/answers-react-components";
 import Product from "../types/products";
 import { config } from "../config/searchConfig";
@@ -30,15 +30,14 @@ type Props = {
 };
 const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
   const searchActions = useSearchActions();
-  const [query, setQuery] = useState("");
-
+  let query = new URLSearchParams(window.location.search).get("query");
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const searchTerm = urlParams.get("query");
-    searchTerm && searchActions.setQuery(searchTerm);
-    searchActions.executeUniversalQuery();
-  });
+    query && searchActions.setQuery(query);
+    verticalKey
+      ? (searchActions.setVertical(verticalKey),
+        searchActions.executeVerticalQuery())
+      : searchActions.executeUniversalQuery;
+  }, []);
 
   const entityPreviewSearcher = provideHeadless({
     ...config,
@@ -58,6 +57,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
   ): any => {
     const productResults = verticalKeyToResults["products"]
       ?.results as unknown as Result<Product>[];
+    console.log(productResults);
 
     return productResults ? (
       <div
