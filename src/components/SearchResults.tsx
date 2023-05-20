@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import { CardComponent } from "@yext/answers-react-components";
 import Product from "../types/products";
 import { config } from "../config/searchConfig";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 type Props = {
   verticalKey?: string;
