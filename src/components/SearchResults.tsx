@@ -86,26 +86,22 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
 
   return (
     <div className="max-w-7xl mx-auto mt-4">
-      {verticalKey === "products" ? (
-        <SearchBar
-          hideRecentSearches={true}
-          visualAutocompleteConfig={{
-            entityPreviewSearcher: entityPreviewSearcher,
-            includedVerticals: ["products"],
-            renderEntityPreviews: renderEntityPreviews,
-            universalLimit: { products: 4 },
-            entityPreviewsDebouncingTime: 500,
-          }}
-          placeholder="search your product"
-          customCssClasses={{
-            searchBarContainer: "z-50",
-            searchButtonContainer:
-              "bg-orange-600 rounded-full text-white h-8 w-8",
-          }}
-        />
-      ) : (
-        <SearchBar hideRecentSearches={true} />
-      )}
+      <SearchBar
+        hideRecentSearches={true}
+        visualAutocompleteConfig={{
+          entityPreviewSearcher: entityPreviewSearcher,
+          includedVerticals: ["products"],
+          renderEntityPreviews: renderEntityPreviews,
+          universalLimit: { products: 4 },
+          entityPreviewsDebouncingTime: 500,
+        }}
+        placeholder="search your product"
+        customCssClasses={{
+          searchBarContainer: "z-50",
+          searchButtonContainer:
+            "bg-orange-600 rounded-full text-white h-8 w-8",
+        }}
+      />
       <div className="flex">
         <div className="w-56 shrink-0 mr-5">
           <StandardFacets />
