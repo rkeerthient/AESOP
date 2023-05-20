@@ -16,7 +16,7 @@ import { config } from "../config/searchConfig";
 type Props = {
   title?: string;
   _site?: any;
-  templateData?: TemplateProps;
+  templateData: TemplateProps;
   children?: React.ReactNode;
   verticalKey?: string;
 };
