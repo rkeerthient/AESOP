@@ -16,12 +16,12 @@ import {
   StandardFacets,
   VerticalResults,
 } from "@yext/search-ui-react";
-import * as React from "react";
 import { useEffect } from "react";
 import { CardComponent } from "@yext/answers-react-components";
 import Product from "../types/products";
 import { config } from "../config/searchConfig";
 import classNames from "classnames";
+import * as React from "react";
 
 type Props = {
   verticalKey?: string;
@@ -68,7 +68,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
             value={result.rawData.name}
             ariaLabel={dropdownItemProps.ariaLabel}
           >
-            <>
+            <a href={result.rawData.slug}>
               {result.rawData.c_prodImageUrls && (
                 <img
                   src={result.rawData.c_prodImageUrls[0]}
@@ -77,7 +77,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
                 />
               )}
               <div className="text-sm">{result.name}</div>
-            </>
+            </a>
           </DropdownItem>
         ))}
       </div>
@@ -104,7 +104,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
       />
       <div className="flex">
         <div className="w-56 shrink-0 mr-5">
-          <StandardFacets />
+          <StandardFacets></StandardFacets>
         </div>
         <div className="flex-grow">
           <div className="flex items-baseline">
