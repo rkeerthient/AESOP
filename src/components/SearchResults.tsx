@@ -29,13 +29,13 @@ type Props = {
   resultsCss: string;
 };
 const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
-  const searchActions = useSearchActions();
-  useEffect(() => {
-    verticalKey
-      ? (searchActions.setVertical(verticalKey),
-        searchActions.executeVerticalQuery())
-      : searchActions.executeUniversalQuery;
-  }, []);
+  // const searchActions = useSearchActions();
+  // useEffect(() => {
+  //   verticalKey
+  //     ? (searchActions.setVertical(verticalKey),
+  //       searchActions.executeVerticalQuery())
+  //     : searchActions.executeUniversalQuery;
+  // }, []);
 
   const entityPreviewSearcher = provideHeadless({
     ...config,
