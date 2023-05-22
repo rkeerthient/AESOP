@@ -21,14 +21,31 @@ const navigation = [
   { name: "Locations Directory", href: "/locations" },
   { name: "Support", href: "/faq-list" },
 ];
-//test
+
 export default function Header({ _site, verticalKey }: any) {
   const entityPreviewSearcher = provideHeadless({
     ...config,
-    headlessId: "visual-autocomplete",
+    headlessId: "entity-preview-searcher",
   });
-  const renderEntityPreviews: RenderEntityPreviews = (
-    autocompleteLoading,
+
+  const renderProductPreview = (product: Product): JSX.Element => {
+    // getting the smallest thumbnail image from the primaryPhoto field
+    const numThumbnails = product.primaryPhoto?.image.thumbnails?.length || 0;
+    const productThumbnail =
+      product.primaryPhoto?.image.thumbnails?.[numThumbnails - 1];
+
+    return (
+      <div className="flex flex-col items-center cursor-pointer hover:bg-gray-100 ">
+        {productThumbnail && (
+          <img className="w-32" src={productThumbnail.url} />
+        )}
+        <div className="font-semibold pl-3">{product.name}</div>
+      </div>
+    );
+  };
+
+  const renderEntityPreviews = (
+    autocompleteLoading: boolean,
     verticalKeyToResults: Record<string, VerticalResultsData>,
     dropdownItemProps: {
       onClick: (
@@ -38,38 +55,35 @@ export default function Header({ _site, verticalKey }: any) {
       ) => void;
       ariaLabel: (value: string) => string;
     }
-  ): any => {
-    const productResults = verticalKeyToResults["products"]
-      ?.results as unknown as Result<Product>[];
-    console.log(productResults);
+  ): JSX.Element | null => {
+    const productResults = verticalKeyToResults["products"]?.results.map(
+      (result) => result.rawData
+    ) as unknown as Product[];
 
     return productResults ? (
       <div
-        className={classNames("grid grid-cols-4 px-8 gap-8", {
+        // laying out the product previews in a grid
+        className={classnames("grid grid-cols-4 px-8", {
+          // fading the results if they're loading
           "opacity-50": autocompleteLoading,
         })}
       >
         {productResults.map((result, i) => (
+          // DropdownItem is impored from @yext/search-ui-react
           <DropdownItem
-            key={result.rawData.id}
-            value={result.rawData.name}
+            key={result.id}
+            value={result.name}
+            // when an item is clicked, it will change the URL
+            onClick={() => history.pushState(null, "", `/product/${result.id}`)}
             ariaLabel={dropdownItemProps.ariaLabel}
           >
-            <>
-              {result.rawData.c_prodImageUrls && (
-                <img
-                  src={result.rawData.c_prodImageUrls[0]}
-                  alt=""
-                  className="h-32 w-32 mx-auto"
-                />
-              )}
-              <div className="text-sm">{result.name}</div>
-            </>
+            {renderProductPreview(result)}
           </DropdownItem>
         ))}
       </div>
     ) : null;
   };
+
   return (
     <header>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -92,10 +106,11 @@ export default function Header({ _site, verticalKey }: any) {
           <div className="ml-10 space-x-4 flex-1">
             <SearchBar
               visualAutocompleteConfig={{
+                entityPreviewSearcher: entityPreviewSearcher,
                 includedVerticals: ["products"],
-                entityPreviewSearcher,
-                renderEntityPreviews,
-                entityPreviewsDebouncingTime: 500,
+                renderEntityPreviews: renderEntityPreviews,
+                universalLimit: { products: 4 },
+                entityPreviewsDebouncingTime: 300,
               }}
             />
           </div>
