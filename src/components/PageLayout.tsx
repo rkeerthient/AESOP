@@ -38,7 +38,7 @@ const PageLayout = ({
           </AnalyticsScopeProvider>
           <StateManager>{children}</StateManager>
           <AnalyticsScopeProvider name={"footer"}>
-            <Footer />
+            <Footer _site={_site} />
           </AnalyticsScopeProvider>
         </div>
       </AnalyticsProvider>

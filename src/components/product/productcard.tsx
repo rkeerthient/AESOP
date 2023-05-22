@@ -24,10 +24,10 @@ const ProductCard = (props: CardProps<Product>) => {
           </div>
           {result.rawData.c_suitedTo && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className=" text-gray-800 font-bold">Suited to</div>
                 <div className="flex-1">
-                  {result.rawData.c_suitedTo.toString().replace(",", ", ")}
+                  {result.rawData.c_suitedTo.toString().replaceAll(",", ", ")}
                 </div>
               </div>
               <hr className="border border-gray-300" />
@@ -35,10 +35,10 @@ const ProductCard = (props: CardProps<Product>) => {
           )}
           {result.rawData.c_skinFeel && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className="text-sm text-gray-800 font-bold">Skin feel</div>
                 <div>
-                  {result.rawData.c_skinFeel.toString().replace(",", ", ")}
+                  {result.rawData.c_skinFeel.toString().replaceAll(",", ", ")}
                 </div>
               </div>
               <hr className="border border-gray-300" />
@@ -46,10 +46,10 @@ const ProductCard = (props: CardProps<Product>) => {
           )}
           {result.rawData.c_aroma && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className="  text-gray-800 font-bold">Aroma</div>
                 <div>
-                  {result.rawData.c_aroma.toString().replace(",", ", ")}
+                  {result.rawData.c_aroma.toString().replaceAll(",", ", ")}
                 </div>
               </div>
               <hr className="border border-gray-300" />
@@ -57,10 +57,12 @@ const ProductCard = (props: CardProps<Product>) => {
           )}
           {result.rawData.c_ingredients && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className="  text-gray-800 font-bold">Key ingredients</div>
                 <div>
-                  {result.rawData.c_ingredients.toString().replace(",", ", ")}
+                  {result.rawData.c_ingredients
+                    .toString()
+                    .replaceAll(",", ", ")}
                 </div>
               </div>
               <hr className="border border-gray-300" />
@@ -68,7 +70,7 @@ const ProductCard = (props: CardProps<Product>) => {
           )}
           {result.rawData.c_sizes && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className="  text-gray-800 font-bold">Sizes</div>
                 <div>
                   <ul className="flex justify-start space-x-6">
@@ -86,11 +88,11 @@ const ProductCard = (props: CardProps<Product>) => {
           )}
           {result.rawData.c_contents && (
             <span className="dummy">
-              <div className="py-2 flex gap-2 text-left h-16">
+              <div className="py-2 flex gap-2 text-left h-20">
                 <div className="  text-gray-800 font-bold">Contents</div>
                 <div>
                   <div className="flex-1">
-                    {result.rawData.c_contents.toString().replace(",", ", ")}
+                    {result.rawData.c_contents.toString().replaceAll(",", ", ")}
                   </div>
                 </div>
               </div>
