@@ -60,7 +60,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
   };
   return (
     <div className="max-w-7xl mx-auto mt-4">
-      {verticalKey ? (
+      {verticalKey != "" ? (
         <div className="flex">
           {/* <div className="w-56 shrink-0 mr-5">
           <StandardFacets></StandardFacets>

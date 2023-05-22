@@ -6,7 +6,11 @@ import {
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
-import { provideHeadless, Result } from "@yext/search-headless-react";
+import {
+  provideHeadless,
+  Result,
+  VerticalResults as VerticalResultsData,
+} from "@yext/search-headless-react";
 import * as classNames from "classnames";
 import { config } from "../config/searchConfig";
 import Product from "../types/products";
