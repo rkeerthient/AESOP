@@ -28,6 +28,7 @@ import classNames from "classnames";
 import * as React from "react";
 import ProductCard from "./product/productcard";
 import HelpArticlesCard from "./HelpArticlesCard";
+import LocationCard from "./LocationCard";
 
 type Props = {
   verticalKey?: string;
@@ -58,6 +59,23 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
       </div>
     );
   };
+
+  const LocationSection = ({ results, CardComponent, header }: any) => {
+    return (
+      <div>
+        <div>{header}</div>
+        {/* <div className="univLocMap">
+          <Mapboxuniv data={results}></Mapboxuniv>
+        </div> */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+          {results.map((r: any) => (
+            <CardComponent result={r} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto mt-4">
       {verticalKey != "" ? (
@@ -98,6 +116,10 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
               faqs: {
                 CardComponent: HelpArticlesCard,
                 viewAllButton: true,
+              },
+              locations: {
+                CardComponent: LocationCard,
+                SectionComponent: LocationSection,
               },
             }}
           />
