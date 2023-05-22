@@ -83,6 +83,7 @@ export default function Header({ _site }: any) {
       <nav className="mx-auto  px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between border-b border-green-800 py-6 md:border-none">
           <div className="flex items-center">
+            <Image image={_site.logo} className="!w-32	"></Image>
             <div className="ml-10 hidden space-x-8 md:block">
               {navigation.map((link) => (
                 <Link
