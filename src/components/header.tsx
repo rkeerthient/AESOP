@@ -1,6 +1,19 @@
 import * as React from "react";
 import { Link } from "@yext/pages/components";
-import { SearchBar } from "@yext/search-ui-react";
+import {
+  DropdownItem,
+  FocusedItemData,
+  RenderEntityPreviews,
+  SearchBar,
+} from "@yext/search-ui-react";
+import {
+  provideHeadless,
+  Result,
+  VerticalResults as VerticalResultsData,
+} from "@yext/search-headless-react";
+import * as classNames from "classnames";
+import { config } from "../config/searchConfig";
+import Product from "../types/products";
 
 const navigation = [
   { name: "Home", href: "/index.html" },
@@ -10,6 +23,52 @@ const navigation = [
 ];
 //test
 export default function Header({ _site }: any) {
+  const entityPreviewSearcher = provideHeadless({
+    ...config,
+    headlessId: "visual-autocomplete",
+  });
+  const renderEntityPreviews: RenderEntityPreviews = (
+    autocompleteLoading,
+    verticalKeyToResults: Record<string, VerticalResultsData>,
+    dropdownItemProps: {
+      onClick: (
+        value: string,
+        _index: number,
+        itemData?: FocusedItemData
+      ) => void;
+      ariaLabel: (value: string) => string;
+    }
+  ): any => {
+    const productResults = verticalKeyToResults["products"]
+      ?.results as unknown as Result<Product>[];
+
+    return productResults ? (
+      <div
+        className={classNames("grid grid-cols-4 px-8 gap-8", {
+          "opacity-50": autocompleteLoading,
+        })}
+      >
+        {productResults.map((result, i) => (
+          <DropdownItem
+            key={result.rawData.id}
+            value={result.rawData.name}
+            ariaLabel={dropdownItemProps.ariaLabel}
+          >
+            <a href={result.rawData.slug}>
+              {result.rawData.c_prodImageUrls && (
+                <img
+                  src={result.rawData.c_prodImageUrls[0]}
+                  alt=""
+                  className="h-32 w-32 mx-auto"
+                />
+              )}
+              <div className="text-sm">{result.name}</div>
+            </a>
+          </DropdownItem>
+        ))}
+      </div>
+    ) : null;
+  };
   return (
     <header>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
