@@ -9,6 +9,7 @@ import {
 import {
   provideHeadless,
   Result,
+  useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
 import { config } from "../config/searchConfig";
@@ -21,7 +22,9 @@ const navigation = [
   { name: "Support", href: "/faq-list" },
 ];
 
-export default function Header({ _site, verticalKey }: any) {
+export default function Header({ _site }: any) {
+  const state = useSearchState((state) => state.vertical.verticalKey);
+
   const entityPreviewSearcher = provideHeadless({
     ...config,
     headlessId: "entity-preview-searcher",
@@ -95,15 +98,19 @@ export default function Header({ _site, verticalKey }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            <SearchBar
-              visualAutocompleteConfig={{
-                entityPreviewSearcher: entityPreviewSearcher,
-                includedVerticals: ["products"],
-                renderEntityPreviews: renderEntityPreviews,
-                universalLimit: { products: 4 },
-                entityPreviewsDebouncingTime: 300,
-              }}
-            />
+            {!state || state === "products" ? (
+              <SearchBar
+                visualAutocompleteConfig={{
+                  entityPreviewSearcher: entityPreviewSearcher,
+                  includedVerticals: ["products"],
+                  renderEntityPreviews: renderEntityPreviews,
+                  universalLimit: { products: 4 },
+                  entityPreviewsDebouncingTime: 300,
+                }}
+              />
+            ) : (
+              <SearchBar />
+            )}
           </div>
         </div>
         <div className="flex flex-wrap justify-center space-x-6 py-4 md:hidden">
