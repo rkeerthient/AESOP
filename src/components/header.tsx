@@ -6,11 +6,7 @@ import {
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
-import {
-  provideHeadless,
-  Result,
-  VerticalResults as VerticalResultsData,
-} from "@yext/search-headless-react";
+import { provideHeadless, Result } from "@yext/search-headless-react";
 import * as classNames from "classnames";
 import { config } from "../config/searchConfig";
 import Product from "../types/products";
@@ -43,6 +39,7 @@ export default function Header({ _site, verticalKey }: any) {
   ): any => {
     const productResults = verticalKeyToResults["products"]
       ?.results as unknown as Result<Product>[];
+    console.log(productResults);
 
     return productResults ? (
       <div
@@ -56,7 +53,7 @@ export default function Header({ _site, verticalKey }: any) {
             value={result.rawData.name}
             ariaLabel={dropdownItemProps.ariaLabel}
           >
-            <a href={result.rawData.slug}>
+            <>
               {result.rawData.c_prodImageUrls && (
                 <img
                   src={result.rawData.c_prodImageUrls[0]}
@@ -65,7 +62,7 @@ export default function Header({ _site, verticalKey }: any) {
                 />
               )}
               <div className="text-sm">{result.name}</div>
-            </a>
+            </>
           </DropdownItem>
         ))}
       </div>
@@ -94,21 +91,31 @@ export default function Header({ _site, verticalKey }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            <SearchBar
-              visualAutocompleteConfig={{
-                entityPreviewSearcher: entityPreviewSearcher,
-                includedVerticals: ["products"],
-                renderEntityPreviews: renderEntityPreviews,
-                universalLimit: { products: 4 },
-                entityPreviewsDebouncingTime: 500,
-              }}
-              placeholder="search your product"
-              customCssClasses={{
-                searchBarContainer: "z-50",
-                searchButtonContainer:
-                  "bg-orange-600 rounded-full text-white h-8 w-8",
-              }}
-            />
+            {verticalKey === "" || verticalKey === "products" ? (
+              <SearchBar
+                visualAutocompleteConfig={{
+                  entityPreviewSearcher: entityPreviewSearcher,
+                  includedVerticals: ["products"],
+                  renderEntityPreviews: renderEntityPreviews,
+                  universalLimit: { products: 4 },
+                  entityPreviewsDebouncingTime: 500,
+                }}
+                placeholder="search your product"
+                customCssClasses={{
+                  searchBarContainer: "z-50",
+                  searchButtonContainer:
+                    "bg-orange-600 rounded-full text-white h-8 w-8",
+                }}
+              />
+            ) : (
+              <SearchBar
+                placeholder="search your product"
+                customCssClasses={{
+                  searchButtonContainer:
+                    "bg-orange-600 rounded-full text-white h-8 w-8",
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-wrap justify-center space-x-6 py-4 md:hidden">
