@@ -31,7 +31,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
   return {
-    title: "About Page",
+    title: "Index Page",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -45,7 +45,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   };
 };
 
-const About: Template<TemplateRenderProps> = ({
+const Index: Template<TemplateRenderProps> = ({
   relativePrefixToRoot,
   path,
   document,
@@ -60,7 +60,7 @@ const About: Template<TemplateRenderProps> = ({
         templateData={{ __meta, document }}
         verticalKey={""}
       >
-        <Banner text="About Page"></Banner>
+        <Banner text="Index Page"></Banner>
         <div className="centered-container">
           <div className="section space-y-10 px-10">
             <SearchResults
@@ -75,4 +75,4 @@ const About: Template<TemplateRenderProps> = ({
   );
 };
 
-export default About;
+export default Index;

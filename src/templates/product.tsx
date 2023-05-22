@@ -142,11 +142,7 @@ const Location: Template<TemplateRenderProps> = ({
 
   return (
     <>
-      <PageLayout
-        _site={_site}
-        templateData={{ __meta, document }}
-        verticalKey="products"
-      >
+      <PageLayout _site={_site} templateData={{ __meta, document }}>
         <div className="section mx-16 ">
           <div className="py-32 text-sm  text-gray-600  font-normal">
             <div className="flex flex-row justify-end">
