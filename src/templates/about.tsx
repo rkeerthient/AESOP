@@ -55,7 +55,11 @@ const About: Template<TemplateRenderProps> = ({
 
   return (
     <>
-      <PageLayout _site={_site} templateData={{ __meta, document }}>
+      <PageLayout
+        _site={_site}
+        templateData={{ __meta, document }}
+        verticalKey={""}
+      >
         <Banner text="About Page"></Banner>
         <div className="centered-container">
           <div className="section space-y-10 px-10">

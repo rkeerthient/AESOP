@@ -22,13 +22,19 @@ type Props = {
 };
 export const searcher = provideHeadless(config);
 
-const PageLayout = ({ title, _site, children, templateData }: Props) => {
+const PageLayout = ({
+  title,
+  _site,
+  children,
+  verticalKey,
+  templateData,
+}: Props) => {
   return (
     <SearchHeadlessProvider searcher={searcher}>
       <AnalyticsProvider templateData={templateData}>
         <div className="min-h-screen">
           <AnalyticsScopeProvider name={"header"}>
-            <Header _site={_site} />
+            <Header _site={_site} verticalKey={verticalKey} />
           </AnalyticsScopeProvider>
           <StateManager>{children}</StateManager>
           <AnalyticsScopeProvider name={"footer"}>

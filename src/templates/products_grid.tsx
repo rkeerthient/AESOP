@@ -49,7 +49,11 @@ const Products_Grid: Template<TemplateRenderProps> = ({
   const { _site } = document;
 
   return (
-    <PageLayout _site={_site} templateData={{ __meta, document }}>
+    <PageLayout
+      _site={_site}
+      templateData={{ __meta, document }}
+      verticalKey="products"
+    >
       <SearchResults
         verticalKey="products"
         cardType={ProductCard}

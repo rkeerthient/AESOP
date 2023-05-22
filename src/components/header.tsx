@@ -19,10 +19,12 @@ const navigation = [
   { name: "Home", href: "/index.html" },
   { name: "Products", href: "/products-grid" },
   { name: "Locations Directory", href: "/locations" },
-  { name: "Support", href: "/faqs" },
+  { name: "Support", href: "/faq-list" },
 ];
 //test
-export default function Header({ _site }: any) {
+export default function Header({ _site, verticalKey }: any) {
+  console.log(JSON.stringify(verticalKey));
+
   const entityPreviewSearcher = provideHeadless({
     ...config,
     headlessId: "visual-autocomplete",
@@ -92,9 +94,27 @@ export default function Header({ _site }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            <SearchBar
-              customCssClasses={{ searchBarContainer: "!mb-0" }}
-            ></SearchBar>
+            {["products", "dummy", ""].includes(verticalKey) ? (
+              <SearchBar
+                visualAutocompleteConfig={{
+                  entityPreviewSearcher: entityPreviewSearcher,
+                  includedVerticals: ["products"],
+                  renderEntityPreviews: renderEntityPreviews,
+                  universalLimit: { products: 4 },
+                  entityPreviewsDebouncingTime: 500,
+                }}
+                placeholder="search your product"
+                customCssClasses={{
+                  searchBarContainer: "z-50",
+                  searchButtonContainer:
+                    "bg-orange-600 rounded-full text-white h-8 w-8",
+                }}
+              />
+            ) : (
+              <SearchBar
+                customCssClasses={{ searchBarContainer: "!mb-0" }}
+              ></SearchBar>
+            )}
           </div>
         </div>
         <div className="flex flex-wrap justify-center space-x-6 py-4 md:hidden">
