@@ -1,11 +1,9 @@
 import * as React from "react";
-import Cta from "./cta";
-import { Image, Link } from "@yext/pages/components";
+import { Link } from "@yext/pages/components";
 import { SearchBar } from "@yext/search-ui-react";
-import NavBar from "./NavBar";
 
 const navigation = [
-  // { name: "Home", href: "/index.html" },
+  { name: "Home", href: "/index.html" },
   { name: "Products", href: "/products-grid" },
   { name: "Store locator", href: "/locator" },
   { name: "Locations Directory", href: "/locations" },
