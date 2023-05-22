@@ -5,7 +5,6 @@ import { SearchBar } from "@yext/search-ui-react";
 const navigation = [
   { name: "Home", href: "/index.html" },
   { name: "Products", href: "/products-grid" },
-  { name: "Store locator", href: "/locator" },
   { name: "Locations Directory", href: "/locations" },
   { name: "Support", href: "/faqs" },
 ];
