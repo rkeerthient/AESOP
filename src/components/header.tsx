@@ -94,7 +94,7 @@ export default function Header({ _site, verticalKey }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            {["products", "dummy", ""].includes(verticalKey) ? (
+            {["products", ""].includes(verticalKey) ? (
               <SearchBar
                 visualAutocompleteConfig={{
                   entityPreviewSearcher: entityPreviewSearcher,

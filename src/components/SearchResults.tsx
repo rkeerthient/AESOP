@@ -62,6 +62,9 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
     <div className="max-w-7xl mx-auto mt-4">
       {verticalKey ? (
         <div className="flex">
+          {/* <div className="w-56 shrink-0 mr-5">
+          <StandardFacets></StandardFacets>
+        </div> */}
           <div className="flex-grow">
             <div className="flex items-baseline">
               <ResultsCount />

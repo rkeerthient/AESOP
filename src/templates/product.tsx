@@ -145,7 +145,7 @@ const Location: Template<TemplateRenderProps> = ({
       <PageLayout
         _site={_site}
         templateData={{ __meta, document }}
-        verticalKey="dummy"
+        verticalKey="products"
       >
         <div className="section mx-16 ">
           <div className="py-32 text-sm  text-gray-600  font-normal">
