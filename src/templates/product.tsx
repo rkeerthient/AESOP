@@ -187,9 +187,11 @@ const Location: Template<TemplateRenderProps> = ({
                 alt=""
               />
             </div>
-            <div className="w-1/2" style={{ background: "#f6f5e8" }}>
-              <MarkdownView markdown={c_howToUse.toString()} />
-            </div>
+            {c_howToUse && (
+              <div className="w-1/2" style={{ background: "#f6f5e8" }}>
+                <MarkdownView markdown={c_howToUse.toString()} />
+              </div>
+            )}
           </div>
         </div>
       </PageLayout>
