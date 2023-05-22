@@ -2,6 +2,7 @@ import {
   Result,
   provideHeadless,
   useSearchActions,
+  VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
 import {
   AppliedFilters,
