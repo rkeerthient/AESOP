@@ -16,8 +16,10 @@ const Product_desc = ({ document }: any) => {
     c_sizes,
     c_skinFeel,
     c_suitedTo,
+    c_contents,
     landingPageUrl,
   } = document;
+
   return (
     <div
       className="md:w-1/4 mr-12 space-y-4"
@@ -61,6 +63,19 @@ const Product_desc = ({ document }: any) => {
           </div>
           <hr className="border border-gray-300" />
         </>
+      )}
+      {c_contents && (
+        <span className="dummy">
+          <div className="py-2 flex gap-2 text-left h-16">
+            <div className="  text-gray-800 font-bold">Contents</div>
+            <div>
+              <div className="flex-1">
+                {c_contents.toString().replace(",", ", ")}
+              </div>
+            </div>
+          </div>
+          <hr className="border border-gray-300" />
+        </span>
       )}
       {c_sizes && (
         <>

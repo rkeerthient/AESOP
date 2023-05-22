@@ -21,7 +21,7 @@ import * as React from "react";
 import "../index.css";
 import SearchResults from "../components/SearchResults";
 import PageLayout from "../components/PageLayout";
-import ProductCard from "../components/product card/productcard";
+import ProductCard from "../components/product/productcard";
 
 export const config: TemplateConfig = {
   name: "products-grid",

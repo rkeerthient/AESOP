@@ -1,10 +1,18 @@
 {
   "$id": "site-entity",
   "filter": {
-    "entityIds": ["turtlehead-tacos-site"]
+    "entityIds": ["3205848076427131872"]
   },
   "source": "knowledgeGraph",
-  "fields": ["name"],
+  "fields": [
+    "name",
+    "c_productRoot.name",
+    "c_productRoot.slug",
+    "c_productRoot.dm_directoryChildren.name",
+    "c_productRoot.dm_directoryChildren.slug",
+    "c_productRoot.dm_directoryChildren.dm_directoryChildren.name",
+    "c_productRoot.dm_directoryChildren.dm_directoryChildren.slug"
+  ],
   "localization": {
     "locales": ["en"],
     "primary": false

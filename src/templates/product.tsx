@@ -12,7 +12,7 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import Product_desc from "../components/product card/product_desc";
+import Product_desc from "../components/product/product_desc";
 import RTF from "../components/RTF";
 import MarkdownView from "react-showdown";
 
@@ -44,6 +44,7 @@ export const config: TemplateConfig = {
       "c_suitedTo",
       "photoGallery",
       "landingPageUrl",
+      "c_contents",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -187,7 +188,7 @@ const Location: Template<TemplateRenderProps> = ({
               />
             </div>
             <div className="w-1/2" style={{ background: "#f6f5e8" }}>
-              {/* <MarkdownView markdown={c_howToUse} /> */}
+              <MarkdownView markdown={c_howToUse.toString()} />
             </div>
           </div>
         </div>
