@@ -23,8 +23,6 @@ const navigation = [
 ];
 //test
 export default function Header({ _site, verticalKey }: any) {
-  console.log(JSON.stringify(verticalKey));
-
   const entityPreviewSearcher = provideHeadless({
     ...config,
     headlessId: "visual-autocomplete",
@@ -95,21 +93,7 @@ export default function Header({ _site, verticalKey }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            <SearchBar
-              visualAutocompleteConfig={{
-                entityPreviewSearcher: entityPreviewSearcher,
-                includedVerticals: ["products"],
-                renderEntityPreviews: renderEntityPreviews,
-                universalLimit: { products: 4 },
-                entityPreviewsDebouncingTime: 500,
-              }}
-              placeholder="search your product"
-              customCssClasses={{
-                searchBarContainer: "z-50",
-                searchButtonContainer:
-                  "bg-orange-600 rounded-full text-white h-8 w-8",
-              }}
-            />
+            <SearchBar />
           </div>
         </div>
         <div className="flex flex-wrap justify-center space-x-6 py-4 md:hidden">
