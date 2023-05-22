@@ -11,7 +11,6 @@ import {
   Result,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
-import * as classNames from "classnames";
 import { config } from "../config/searchConfig";
 import Product from "../types/products";
 
@@ -29,7 +28,6 @@ export default function Header({ _site, verticalKey }: any) {
   });
 
   const renderProductPreview = (product: Product): JSX.Element => {
-    // getting the smallest thumbnail image from the primaryPhoto field
     const numThumbnails = product.primaryPhoto?.image.thumbnails?.length || 0;
     const productThumbnail =
       product.primaryPhoto?.image.thumbnails?.[numThumbnails - 1];
@@ -59,21 +57,14 @@ export default function Header({ _site, verticalKey }: any) {
     const productResults = verticalKeyToResults["products"]?.results.map(
       (result) => result.rawData
     ) as unknown as Product[];
+    console.log(JSON.stringify(productResults));
 
     return productResults ? (
-      <div
-        // laying out the product previews in a grid
-        className={classnames("grid grid-cols-4 px-8", {
-          // fading the results if they're loading
-          "opacity-50": autocompleteLoading,
-        })}
-      >
+      <div className="grid grid-cols-4 px-8">
         {productResults.map((result, i) => (
-          // DropdownItem is impored from @yext/search-ui-react
           <DropdownItem
             key={result.id}
             value={result.name}
-            // when an item is clicked, it will change the URL
             onClick={() => history.pushState(null, "", `/product/${result.id}`)}
             ariaLabel={dropdownItemProps.ariaLabel}
           >
