@@ -9,6 +9,7 @@ const navigation = [
   { name: "Products", href: "/products-grid" },
   { name: "Store locator", href: "/locator" },
   { name: "Locations Directory", href: "/locations" },
+  { name: "Support", href: "/faqs" },
 ];
 
 export default function Header({ _site }: any) {
