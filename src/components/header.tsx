@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "@yext/pages/components";
+import { Image, Link } from "@yext/pages/components";
 import {
   DropdownItem,
   FocusedItemData,
@@ -24,6 +24,7 @@ const navigation = [
 
 export default function Header({ _site }: any) {
   const state = useSearchState((state) => state.vertical.verticalKey);
+  console.log(JSON.stringify(_site));
 
   const entityPreviewSearcher = provideHeadless({
     ...config,
@@ -60,7 +61,7 @@ export default function Header({ _site }: any) {
     const productResults = verticalKeyToResults["products"]?.results.map(
       (result) => result.rawData
     ) as unknown as Product[];
- 
+
     return productResults ? (
       <div className="grid grid-cols-4 px-8">
         {productResults.map((result, i) => (
@@ -79,7 +80,7 @@ export default function Header({ _site }: any) {
 
   return (
     <header>
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
+      <nav className="mx-auto  px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between border-b border-green-800 py-6 md:border-none">
           <div className="flex items-center">
             <div className="ml-10 hidden space-x-8 md:block">
@@ -99,6 +100,8 @@ export default function Header({ _site }: any) {
           <div className="ml-10 space-x-4 flex-1">
             {!state || state === "products" ? (
               <SearchBar
+                hideRecentSearches={true}
+                customCssClasses={{ searchBarContainer: "!mb-0" }}
                 visualAutocompleteConfig={{
                   entityPreviewSearcher: entityPreviewSearcher,
                   includedVerticals: ["products"],
@@ -108,7 +111,10 @@ export default function Header({ _site }: any) {
                 }}
               />
             ) : (
-              <SearchBar />
+              <SearchBar
+                customCssClasses={{ searchBarContainer: "!mb-0" }}
+                hideRecentSearches={true}
+              />
             )}
           </div>
         </div>

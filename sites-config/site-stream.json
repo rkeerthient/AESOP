@@ -4,15 +4,7 @@
     "entityIds": ["3205848076427131872"]
   },
   "source": "knowledgeGraph",
-  "fields": [
-    "name",
-    "c_productRoot.name",
-    "c_productRoot.slug",
-    "c_productRoot.dm_directoryChildren.name",
-    "c_productRoot.dm_directoryChildren.slug",
-    "c_productRoot.dm_directoryChildren.dm_directoryChildren.name",
-    "c_productRoot.dm_directoryChildren.dm_directoryChildren.slug"
-  ],
+  "fields": ["name", "logo"],
   "localization": {
     "locales": ["en"],
     "primary": false
