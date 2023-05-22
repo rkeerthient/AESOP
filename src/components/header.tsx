@@ -60,8 +60,7 @@ export default function Header({ _site }: any) {
     const productResults = verticalKeyToResults["products"]?.results.map(
       (result) => result.rawData
     ) as unknown as Product[];
-    console.log(JSON.stringify(productResults));
-
+ 
     return productResults ? (
       <div className="grid grid-cols-4 px-8">
         {productResults.map((result, i) => (

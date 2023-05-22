@@ -7,9 +7,6 @@ const CategoryGrid = (props: any) => {
   let vertKey = props.verticalKey;
   useLayoutEffect(() => {
     searchActions.setVertical("products");
-    // searchActions.setStaticFilters([
-    //   { filter: props.initialFilter, selected: true },
-    // ]);
     searchActions
       .executeVerticalQuery()
       .then((res) => console.log(JSON.stringify(res)));

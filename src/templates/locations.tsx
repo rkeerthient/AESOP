@@ -98,7 +98,6 @@ const Index: Template<TemplateRenderProps> = ({
       </a>
     </div>
   ));
-  console.log(isDir);
 
   return (
     <>
