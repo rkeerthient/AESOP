@@ -14,6 +14,8 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
+import { useState } from "react";
+import LocationPage from "../components/location/locationPage";
 
 export const config: TemplateConfig = {
   stream: {
@@ -40,7 +42,7 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `index.html`;
+  return `locations`;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -79,7 +81,7 @@ const Index: Template<TemplateRenderProps> = ({
   __meta,
 }) => {
   const { _site, dm_directoryChildren } = document;
-
+  const [isDir, setIsDir] = useState(true);
   var sortedChildren = dm_directoryChildren.sort(function (a: any, b: any) {
     var a = a.name,
       b = b.name;
@@ -96,28 +98,58 @@ const Index: Template<TemplateRenderProps> = ({
       </a>
     </div>
   ));
+  console.log(isDir);
 
   return (
     <>
       <PageLayout _site={_site} templateData={{ __meta, document }}>
         <div className="centered-container">
-          <BreadCrumbs name="Home" baseUrl={relativePrefixToRoot} />
-
-          <div className="section space-y-6 px-10">
-            <h1 className="text-left text-2xl">AESOP Locations Directory</h1>
-            <p className="text-normal font-semibold text-left">
-              {dm_directoryChildren &&
-                dm_directoryChildren.flat().reduce(function (a: any, b: any) {
-                  return parseInt(b["dm_directoryChildrenCount"]) == null
-                    ? a
-                    : a + parseInt(b["dm_directoryChildrenCount"]);
-                }, 0)}{" "}
-              stores in the Europe
-            </p>
-            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
-              {childrenDivs}
+          <ul className="w-full flex justify-between">
+            <li
+              className={`${
+                isDir && `bg-gray-500 text-white`
+              }  hover:cursor-pointer text-center border w-1/2 py-4 font-bold `}
+              onClick={() => setIsDir(true)}
+            >
+              Directory
+            </li>
+            <li
+              className={`${
+                !isDir && `bg-gray-500 text-white`
+              } hover:cursor-pointer text-center border w-1/2 py-4 font-bold`}
+              onClick={() => setIsDir(false)}
+            >
+              Locator
+            </li>
+          </ul>
+          {isDir ? (
+            <>
+              <BreadCrumbs name="Home" baseUrl={relativePrefixToRoot} />
+              <div className="section space-y-6 px-10">
+                <h1 className="text-left text-2xl">
+                  AESOP Locations Directory
+                </h1>
+                <p className="text-normal font-semibold text-left">
+                  {dm_directoryChildren &&
+                    dm_directoryChildren
+                      .flat()
+                      .reduce(function (a: any, b: any) {
+                        return parseInt(b["dm_directoryChildrenCount"]) == null
+                          ? a
+                          : a + parseInt(b["dm_directoryChildrenCount"]);
+                      }, 0)}{" "}
+                  stores in the Europe
+                </p>
+                <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+                  {childrenDivs}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="mt-6">
+              <LocationPage />
             </div>
-          </div>
+          )}
         </div>
       </PageLayout>
     </>

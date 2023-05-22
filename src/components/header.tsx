@@ -5,10 +5,10 @@ import { SearchBar } from "@yext/search-ui-react";
 import NavBar from "./NavBar";
 
 const navigation = [
-  { name: "Home", href: "/index.html" },
+  // { name: "Home", href: "/index.html" },
   { name: "Products", href: "/products-grid" },
   { name: "Store locator", href: "/locator" },
-  { name: "Locations Directory", href: "/index.html" },
+  { name: "Locations Directory", href: "/locations" },
 ];
 
 export default function Header({ _site }: any) {
@@ -17,15 +17,15 @@ export default function Header({ _site }: any) {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between border-b border-green-800 py-6 md:border-none">
           <div className="flex items-center">
-            <a href="/index.html">
+            {/* <a href="/index.html">
               <span className="sr-only">Turtlehead Tacos</span>
-            </a>
+            </a> */}
             <div className="ml-10 hidden space-x-8 md:block">
               {navigation.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-base font-medium text-black hover:text-indigo-50"
+                  className="text-base font-medium text-black hover:underline"
                   rel="noopener noreferrer"
                   eventName={`cta Click: ${link.name}`}
                 >
@@ -33,7 +33,6 @@ export default function Header({ _site }: any) {
                 </Link>
               ))}
             </div>
-            {/* <NavBar _site={_site}></NavBar> */}
           </div>
           <div className="ml-10 space-x-4 flex-1">
             <SearchBar
@@ -46,7 +45,7 @@ export default function Header({ _site }: any) {
             <Link
               key={link.name}
               href={link.href}
-              className="text-base font-medium text-white hover:text-indigo-50"
+              className="text-base font-medium text-white hover:underline"
               rel="noopener noreferrer"
               eventName={`cta Click: ${link.name}`}
             >
