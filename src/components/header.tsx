@@ -75,9 +75,6 @@ export default function Header({ _site, verticalKey }: any) {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between border-b border-green-800 py-6 md:border-none">
           <div className="flex items-center">
-            {/* <a href="/index.html">
-              <span className="sr-only">Turtlehead Tacos</span>
-            </a> */}
             <div className="ml-10 hidden space-x-8 md:block">
               {navigation.map((link) => (
                 <Link
@@ -93,7 +90,14 @@ export default function Header({ _site, verticalKey }: any) {
             </div>
           </div>
           <div className="ml-10 space-x-4 flex-1">
-            <SearchBar />
+            <SearchBar
+              visualAutocompleteConfig={{
+                includedVerticals: ["products"],
+                entityPreviewSearcher,
+                renderEntityPreviews,
+                entityPreviewsDebouncingTime: 500,
+              }}
+            />
           </div>
         </div>
         <div className="flex flex-wrap justify-center space-x-6 py-4 md:hidden">
