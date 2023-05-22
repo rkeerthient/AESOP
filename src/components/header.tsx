@@ -81,7 +81,7 @@ export default function Header({ _site }: any) {
                   <img
                     src={result.c_prodImageUrls[0]}
                     alt=""
-                    className="h-32 w-32 mx-auto"
+                    className="h-full w-32 mx-auto"
                   />
                 )}
                 <div className="text-sm">{result.name}</div>
