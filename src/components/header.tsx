@@ -71,7 +71,22 @@ export default function Header({ _site }: any) {
             onClick={() => history.pushState(null, "", `/product/${result.id}`)}
             ariaLabel={dropdownItemProps.ariaLabel}
           >
-            {renderProductPreview(result)}
+            <DropdownItem
+              key={result.id}
+              value={result.name}
+              ariaLabel={dropdownItemProps.ariaLabel}
+            >
+              <a href={result.slug}>
+                {result.c_prodImageUrls && (
+                  <img
+                    src={result.c_prodImageUrls[0]}
+                    alt=""
+                    className="h-32 w-32 mx-auto"
+                  />
+                )}
+                <div className="text-sm">{result.name}</div>
+              </a>
+            </DropdownItem>
           </DropdownItem>
         ))}
       </div>
