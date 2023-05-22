@@ -8,11 +8,13 @@ const ProductCard = (props: CardProps<Product>) => {
   return (
     <div className="flex flex-col">
       <a href={result.rawData.slug}>
-        <img
-          src={result.rawData.c_prodImageUrls![0]}
-          alt=""
-          className="w-auto h-72"
-        />
+        {result.rawData.c_prodImageUrls && (
+          <img
+            src={result.rawData.c_prodImageUrls![0]}
+            alt=""
+            className="w-auto h-72"
+          />
+        )}
         <div className="flex flex-col space-y-8 text-center text-sm resCntr">
           <div className="flex flex-col space-y-3">
             <div className="text-gray-800 font-bold">{result.name}</div>
