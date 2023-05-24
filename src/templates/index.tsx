@@ -53,7 +53,7 @@ const Index: Template<TemplateRenderProps> = ({
   __meta,
 }) => {
   const { _site } = document;
-  const [queryTerm, setQueryTerm] = useState();
+  const [queryTerm, setQueryTerm] = useState("");
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");
