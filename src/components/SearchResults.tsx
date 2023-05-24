@@ -51,7 +51,7 @@ const SearchResults = ({
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
       : searchActions.executeUniversalQuery;
-  }, []);
+  }, [queryTerm]);
 
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
