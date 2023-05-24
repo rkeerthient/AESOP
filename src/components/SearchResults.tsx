@@ -50,7 +50,7 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
       : searchActions.executeUniversalQuery;
-  }, []);
+  });
 
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
