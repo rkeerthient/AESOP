@@ -20,7 +20,7 @@ import {
   SpellCheck,
   UniversalResults,
 } from "@yext/search-ui-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CardComponent } from "@yext/answers-react-components";
 import Product from "../types/products";
 import { config } from "../config/searchConfig";
@@ -39,18 +39,13 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    if (Object.keys(urlSearchParams).length !== 0) {
-      const params = Object.fromEntries(urlSearchParams.entries());
-      const { query } = params;
-      console.log(query);
-      console.log(urlSearchParams);
-      params && searchActions.setQuery(query);
-    }
+    const query = urlSearchParams.get("query");
+    query && searchActions.setQuery(query);
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
       : searchActions.executeUniversalQuery;
-  });
+  }, []);
 
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
