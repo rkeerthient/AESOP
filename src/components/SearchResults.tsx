@@ -42,10 +42,11 @@ const SearchResults = ({
   resultsCss,
 }: Props) => {
   const searchActions = useSearchActions();
-  console.log(queryTerm);
 
   useEffect(() => {
     queryTerm && searchActions.setQuery(queryTerm);
+    console.log(queryTerm);
+
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
