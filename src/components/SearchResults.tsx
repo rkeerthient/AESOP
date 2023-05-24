@@ -39,13 +39,13 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const { query } = params;
-    console.log(query);
-    console.log(urlSearchParams);
-
-    params && searchActions.setQuery(query);
-
+    if (Object.keys(urlSearchParams).length !== 0) {
+      const params = Object.fromEntries(urlSearchParams.entries());
+      const { query } = params;
+      console.log(query);
+      console.log(urlSearchParams);
+      params && searchActions.setQuery(query);
+    }
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
