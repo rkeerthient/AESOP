@@ -44,20 +44,13 @@ const SearchResults = ({
   const searchActions = useSearchActions();
 
   useEffect(() => {
-    const handleLoad = () => {
-      console.log(queryTerm);
-      queryTerm && searchActions.setQuery(queryTerm);
-      verticalKey
-        ? (searchActions.setVertical(verticalKey),
-          searchActions.executeVerticalQuery())
-        : searchActions.executeUniversalQuery;
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const query = urlSearchParams.get("query");
+    query && searchActions.setQuery(query);
+    verticalKey
+      ? (searchActions.setVertical(verticalKey),
+        searchActions.executeVerticalQuery())
+      : searchActions.executeUniversalQuery();
   }, []);
 
   const GridSection = ({ results, CardComponent, header }: any) => {
