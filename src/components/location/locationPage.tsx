@@ -72,7 +72,7 @@ const LocationPage = () => {
         <div>
           <div className="flex flex-row">
             <div
-              className="flex flex-col w-2/5 bg-gray-100 p-4 overflow-scroll"
+              className="flex flex-col w-2/5  p-4 overflow-scroll"
               style={{ height: "95vh" }}
             >
               <ResultsCount />

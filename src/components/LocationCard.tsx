@@ -22,11 +22,9 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
   var gmapsLink = gmapsAddress.concat('"');
 
   return (
-    <div className="p-4 bg-white space-y-3 hover:bg-gray-50">
-      <a target="_blank" href={`${result.rawData.slug}`} className="space-y-3">
-        <h1 className="text-slate-900 text-3xl text-blue-700">
-          {result.rawData.name}
-        </h1>
+    <div className="p-4 border border-transparent hover:border hover:border-gray-400">
+      <a target="_blank" href={`${result.rawData.slug}`} className="space-y-6">
+        <h1 className="text-slate-900 text-3xl">{result.rawData.name}</h1>
         <div>
           <p className="text-sm text-slate-700">{address.line1}</p>
           <p className="text-sm text-slate-700">
@@ -36,11 +34,11 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
             {metersToMiles(result.distanceFromFilter ?? 0)} mi
           </p>
         </div>
-        <div>
+        <div className="mt-4">
           <a
             target="_blank"
             href={gmapsLink}
-            className="text-sm text-blue-700 hover:underline"
+            className="CTA-1 !px-6 !py-3 !text-sm   hover:underline"
           >
             Get Directions
           </a>
