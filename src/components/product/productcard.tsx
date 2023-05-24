@@ -6,7 +6,7 @@ const ProductCard = (props: CardProps<Product>) => {
   const { result } = props;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col hovCards p-4">
       <a href={result.rawData.slug}>
         {result.rawData.c_prodImageUrls && (
           <img

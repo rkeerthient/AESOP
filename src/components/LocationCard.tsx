@@ -22,7 +22,7 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
   var gmapsLink = gmapsAddress.concat('"');
 
   return (
-    <div className="p-4 border border-transparent hover:border hover:border-gray-400">
+    <div className="p-4 border border-transparent hover:border hover:border-gray-400 hovCards">
       <a target="_blank" href={`${result.rawData.slug}`} className="space-y-6">
         <h1 className="text-slate-900 text-3xl">{result.rawData.name}</h1>
         <div>
