@@ -17,7 +17,7 @@ import Product from "../types/products";
 import { useEffect, useState } from "react";
 
 const navigation = [
-  { name: "Home", href: "index" },
+  { name: "Home", href: "/" },
   { name: "Products", href: "/products-grid" },
   { name: "Locations Directory", href: "/locations" },
   { name: "Support", href: "/faq-list" },
