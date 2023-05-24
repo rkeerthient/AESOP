@@ -43,15 +43,13 @@ const SearchResults = ({
 }: Props) => {
   const searchActions = useSearchActions();
 
-  useEffect(() => {
+  React.useLayoutEffect(() => {
     queryTerm && searchActions.setQuery(queryTerm);
-    console.log(queryTerm);
-
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
       : searchActions.executeUniversalQuery;
-  }, [queryTerm]);
+  });
 
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
