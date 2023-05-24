@@ -42,6 +42,8 @@ const SearchResults = ({
   resultsCss,
 }: Props) => {
   const searchActions = useSearchActions();
+  console.log(queryTerm);
+
   useEffect(() => {
     queryTerm && searchActions.setQuery(queryTerm);
     verticalKey
