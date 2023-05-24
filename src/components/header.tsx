@@ -110,7 +110,7 @@ export default function Header({ _site }: any) {
     } else {
       queryParams.delete("query");
     }
-    window.location.href = `/index.html?${queryParams.toString()}`;
+    window.location.href = `/?${queryParams.toString()}`;
   };
   return (
     <header>
