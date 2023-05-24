@@ -16,6 +16,7 @@ import {
 } from "@yext/pages";
 import SearchResults from "../components/SearchResults";
 import { StandardCard } from "@yext/search-ui-react";
+import { useEffect } from "react";
 
 export const config: TemplateConfig = {
   name: "index.html",
@@ -52,6 +53,12 @@ const Index: Template<TemplateRenderProps> = ({
   __meta,
 }) => {
   const { _site } = document;
+
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const query = urlSearchParams.get("query");
+    console.log(query);
+  }, []);
 
   return (
     <>
