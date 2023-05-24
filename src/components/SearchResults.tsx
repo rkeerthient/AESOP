@@ -43,13 +43,22 @@ const SearchResults = ({
 }: Props) => {
   const searchActions = useSearchActions();
 
-  React.useLayoutEffect(() => {
-    queryTerm && searchActions.setQuery(queryTerm);
-    verticalKey
-      ? (searchActions.setVertical(verticalKey),
-        searchActions.executeVerticalQuery())
-      : searchActions.executeUniversalQuery;
-  });
+  useEffect(() => {
+    const handleLoad = () => {
+      console.log(queryTerm);
+      queryTerm && searchActions.setQuery(queryTerm);
+      verticalKey
+        ? (searchActions.setVertical(verticalKey),
+          searchActions.executeVerticalQuery())
+        : searchActions.executeUniversalQuery;
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
 
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
