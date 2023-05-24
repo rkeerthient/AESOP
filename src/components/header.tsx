@@ -5,15 +5,16 @@ import {
   FocusedItemData,
   RenderEntityPreviews,
   SearchBar,
+  onSearchFunc,
 } from "@yext/search-ui-react";
 import {
   provideHeadless,
-  Result,
   useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
 import { config } from "../config/searchConfig";
 import Product from "../types/products";
+import { useEffect, useState } from "react";
 
 const navigation = [
   { name: "Home", href: "/index.html" },
@@ -24,7 +25,12 @@ const navigation = [
 
 export default function Header({ _site }: any) {
   const state = useSearchState((state) => state.vertical.verticalKey);
-  console.log(JSON.stringify(_site));
+  const [path, setPath] = useState("");
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    setPath(currentPath);
+    return () => {};
+  }, []);
 
   const entityPreviewSearcher = provideHeadless({
     ...config,
@@ -46,7 +52,7 @@ export default function Header({ _site }: any) {
     );
   };
 
-  const renderEntityPreviews = (
+  const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading: boolean,
     verticalKeyToResults: Record<string, VerticalResultsData>,
     dropdownItemProps: {
@@ -93,6 +99,19 @@ export default function Header({ _site }: any) {
     ) : null;
   };
 
+  const handleSearch: onSearchFunc = (searchEventData) => {
+    console.log(searchEventData);
+    const { query } = searchEventData;
+
+    const queryParams = new URLSearchParams(window.location.search);
+
+    if (query) {
+      queryParams.set("query", query);
+    } else {
+      queryParams.delete("query");
+    }
+    window.location.href = `/index.html?${queryParams.toString()}`;
+  };
   return (
     <header>
       <nav className="mx-auto  px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -115,17 +134,32 @@ export default function Header({ _site }: any) {
           </div>
           <div className="ml-10 space-x-4 flex-1">
             {!state || state === "products" ? (
-              <SearchBar
-                hideRecentSearches={true}
-                customCssClasses={{ searchBarContainer: "!mb-0" }}
-                visualAutocompleteConfig={{
-                  entityPreviewSearcher: entityPreviewSearcher,
-                  includedVerticals: ["products"],
-                  renderEntityPreviews: renderEntityPreviews,
-                  universalLimit: { products: 4 },
-                  entityPreviewsDebouncingTime: 300,
-                }}
-              />
+              path && path.includes("products") ? (
+                <SearchBar
+                  hideRecentSearches={true}
+                  customCssClasses={{ searchBarContainer: "!mb-0" }}
+                  visualAutocompleteConfig={{
+                    entityPreviewSearcher: entityPreviewSearcher,
+                    includedVerticals: ["products"],
+                    renderEntityPreviews: renderEntityPreviews,
+                    universalLimit: { products: 4 },
+                    entityPreviewsDebouncingTime: 300,
+                  }}
+                  onSearch={handleSearch}
+                />
+              ) : (
+                <SearchBar
+                  hideRecentSearches={true}
+                  customCssClasses={{ searchBarContainer: "!mb-0" }}
+                  visualAutocompleteConfig={{
+                    entityPreviewSearcher: entityPreviewSearcher,
+                    includedVerticals: ["products"],
+                    renderEntityPreviews: renderEntityPreviews,
+                    universalLimit: { products: 4 },
+                    entityPreviewsDebouncingTime: 300,
+                  }}
+                />
+              )
             ) : (
               <SearchBar
                 customCssClasses={{ searchBarContainer: "!mb-0" }}
