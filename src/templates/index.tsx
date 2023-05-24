@@ -19,11 +19,11 @@ import { StandardCard } from "@yext/search-ui-react";
 import { useEffect, useState } from "react";
 
 export const config: TemplateConfig = {
-  name: "/",
+  name: "index",
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `/`;
+  return `index`;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
