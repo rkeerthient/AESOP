@@ -24,7 +24,6 @@ import { useEffect } from "react";
 import { CardComponent } from "@yext/answers-react-components";
 import Product from "../types/products";
 import { config } from "../config/searchConfig";
-import classNames from "classnames";
 import * as React from "react";
 import ProductCard from "./product/productcard";
 import HelpArticlesCard from "./HelpArticlesCard";
@@ -42,6 +41,9 @@ const SearchResults = ({ verticalKey, cardType, resultsCss }: Props) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     const { query } = params;
+    console.log(query);
+    console.log(urlSearchParams);
+
     params && searchActions.setQuery(query);
 
     verticalKey
