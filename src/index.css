@@ -59,6 +59,11 @@ h2 {
 .CTA-1 {
   @apply w-3/4 px-4 py-2 border text-black hover:bg-black hover:text-white hover:cursor-pointer;
 }
+
+.promo-cta {
+  @apply w-fit px-4 py-2 border bg-white text-black hover:border hover:bg-black hover:text-white hover:cursor-pointer;
+}
+
 .hovCards:hover {
   background-color: #f0efe1 !important;
 }

@@ -28,6 +28,7 @@ import * as React from "react";
 import ProductCard from "./product/productcard";
 import HelpArticlesCard from "./HelpArticlesCard";
 import LocationCard from "./LocationCard";
+import PromoCard from "./promoCard";
 
 type Props = {
   verticalKey?: string;
@@ -129,6 +130,9 @@ const SearchResults = ({
               locations: {
                 CardComponent: LocationCard,
                 SectionComponent: LocationSection,
+              },
+              promotion: {
+                CardComponent: PromoCard,
               },
             }}
           />

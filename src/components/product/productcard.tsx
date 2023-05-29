@@ -4,7 +4,6 @@ import Product from "../../types/products";
 
 const ProductCard = (props: CardProps<Product>) => {
   const { result } = props;
-  console.log(JSON.stringify(result.rawData));
 
   return (
     <a href={result.rawData.slug}>
