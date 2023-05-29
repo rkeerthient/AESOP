@@ -9,7 +9,7 @@ const metersToMiles = (meters: number) => {
 };
 
 const UnivLocationCard: CardComponent<Location> = ({ result }) => {
-  const { hours, address } = result.rawData;
+  const { address } = result.rawData;
 
   var gmaps = "https://www.google.com/maps/dir/?api=1&destination=";
   var gmapsAddress = gmaps.concat(
