@@ -12,6 +12,10 @@ h2 {
   @apply text-2xl font-semibold;
 }
 
+h3 {
+  @apply text-xl font-semibold;
+}
+
 .centered-container {
   @apply mx-auto px-5 md:px-14 max-w-screen-xl;
 }

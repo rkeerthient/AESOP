@@ -181,7 +181,7 @@ const Location: Template<TemplateRenderProps> = ({
             </div>
           </div>
         </div>
-        <div className="section border" style={{ height: "90vh" }}>
+        <div className="section border">
           <div className="flex min-h-screen	flex-row">
             <div className="w-1/2">
               <img
@@ -192,8 +192,13 @@ const Location: Template<TemplateRenderProps> = ({
               />
             </div>
             {c_howToUse && (
-              <div className="w-1/2" style={{ background: "#f6f5e8" }}>
-                <MarkdownView markdown={c_howToUse.toString()} />
+              <div
+                className="w-1/2 flex justify-center"
+                style={{ background: "#f6f5e8" }}
+              >
+                <div className="w-1/2 my-auto">
+                  <MarkdownView markdown={c_howToUse.markdown} />
+                </div>
               </div>
             )}
           </div>
