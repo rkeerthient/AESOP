@@ -20,6 +20,7 @@ import PromoCard from "./promoCard";
 import { useMyContext } from "../context/context";
 import Mapboxuniv from "./Mapboxuniv";
 import UnivLocationCard from "./univLocCard";
+import { SortDropdown } from "./SortDropdown";
 
 type Props = {
   verticalKey?: string;
@@ -98,9 +99,13 @@ const SearchResults = ({
             <StandardFacets />
           </div>
           <div className="flex-grow">
-            <div className="flex items-baseline">
-              <ResultsCount />
-              <AppliedFilters />
+            <div className="flex items-baseline justify-between">
+              <div className="flex items-baseline">
+                <ResultsCount />
+                <AppliedFilters />
+              </div>
+
+              <SortDropdown />
             </div>
             <VR
               CardComponent={cardType}
