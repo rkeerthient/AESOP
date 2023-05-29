@@ -173,6 +173,25 @@ export interface EntityReference {
 	name: string,
 }
 
+export enum LinkType {
+	OTHER = "Other",
+	URL = "URL",
+	PHONE = "Phone",
+	EMAIL = "Email",
+}
+
+export interface C_primaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export interface C_secondaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
 export interface ProductLists {
 	label?: string,
 	ids?: string[],
@@ -463,7 +482,9 @@ export default interface Location {
 	c_internalName?: string,
 	c_openDate?: string,
 	c_openMonth?: string,
+	c_primaryCTA?: C_primaryCTA,
 	c_productPhotoUrls?: Image[],
+	c_secondaryCTA?: C_secondaryCTA,
 	displayCoordinate?: Coordinate,
 	dropoffCoordinate?: Coordinate,
 	productLists?: ProductLists,

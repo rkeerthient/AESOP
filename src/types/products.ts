@@ -347,6 +347,25 @@ export interface UnitPricingMeasure {
 	value: number,
 }
 
+export enum LinkType {
+	OTHER = "Other",
+	URL = "URL",
+	PHONE = "Phone",
+	EMAIL = "Email",
+}
+
+export interface C_primaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export interface C_secondaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
 export interface ComplexVideo {
 	url: string,
 	video?: string,
@@ -410,7 +429,9 @@ export default interface Product {
 	c_howToUse?: any,
 	c_howToUseImage?: string,
 	c_ingredients?: string[],
+	c_primaryCTA?: C_primaryCTA,
 	c_prodImageUrls?: string[],
+	c_secondaryCTA?: C_secondaryCTA,
 	c_sizes?: string[],
 	c_skinFeel?: string[],
 	c_suitedTo?: string[],
