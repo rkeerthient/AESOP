@@ -47,14 +47,14 @@ const UnivLocationCard: CardComponent<Location> = ({ result }) => {
               {result.rawData.mainPhone}
             </div>
           </div>
-          <div>
+          {/* <div>
             {hours && (
               <HoursText
                 hours={hours}
                 timezone={result.rawData.timezone}
               ></HoursText>
             )}
-          </div>
+          </div> */}
           <div className="mt-4 flex flex-col space-y-2">
             <a
               target="_blank"
