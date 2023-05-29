@@ -2,7 +2,7 @@ import * as React from "react";
 
 type Hours = {
   title?: string;
-  hours: Week;
+  hours?: Week;
   children?: React.ReactNode;
 };
 
@@ -138,6 +138,8 @@ const DayRow = (props: DayRow) => {
 
 const Hours = (props: Hours) => {
   const { title, hours } = props;
+  console.log(title);
+  console.log(JSON.stringify(hours));
 
   return (
     <>

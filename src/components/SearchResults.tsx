@@ -18,6 +18,8 @@ import HelpArticlesCard from "./HelpArticlesCard";
 import LocationCard from "./LocationCard";
 import PromoCard from "./promoCard";
 import { useMyContext } from "../context/context";
+import Mapboxuniv from "./Mapboxuniv";
+import UnivLocationCard from "./univLocCard";
 
 type Props = {
   verticalKey?: string;
@@ -66,12 +68,12 @@ const SearchResults = ({
     return (
       <div>
         <div>{header}</div>
-        {/* <div className="univLocMap">
+        <div className="univLocMap ">
           <Mapboxuniv data={results}></Mapboxuniv>
-        </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
-          {results.map((r: any) => (
-            <CardComponent result={r} />
+        </div>
+        <div className="flex flex-col w-full gap-4 mt-4">
+          {results.map((r: any, index: number) => (
+            <CardComponent key={index} result={r} />
           ))}
         </div>
       </div>
@@ -82,7 +84,6 @@ const SearchResults = ({
     <div className="max-w-7xl mx-auto mt-4">
       {promoData && promoData.verticalResults && (
         <div className="mb-8">
-          {" "}
           <PromoCard
             result={promoData.verticalResults[0].results[0]}
           ></PromoCard>
@@ -128,7 +129,7 @@ const SearchResults = ({
                 viewAllButton: true,
               },
               locations: {
-                CardComponent: LocationCard,
+                CardComponent: UnivLocationCard,
                 SectionComponent: LocationSection,
               },
               promotion: {

@@ -13,6 +13,7 @@ import {
 } from "@yext/search-headless-react";
 import { config } from "../config/searchConfig";
 import { MyContextProvider } from "../context/context";
+import { LocationsProvider } from "../context/LocationsContext";
 
 type Props = {
   title?: string;
@@ -32,20 +33,21 @@ const PageLayout = ({
 }: Props) => {
   return (
     <MyContextProvider>
-      {" "}
-      <SearchHeadlessProvider searcher={searcher}>
-        <AnalyticsProvider templateData={templateData}>
-          <div className="min-h-screen">
-            <AnalyticsScopeProvider name={"header"}>
-              <Header _site={_site} verticalKey={verticalKey} />
-            </AnalyticsScopeProvider>
-            <StateManager>{children}</StateManager>{" "}
-            <AnalyticsScopeProvider name={"footer"}>
-              <Footer _site={_site} />
-            </AnalyticsScopeProvider>
-          </div>
-        </AnalyticsProvider>
-      </SearchHeadlessProvider>
+      <LocationsProvider>
+        <SearchHeadlessProvider searcher={searcher}>
+          <AnalyticsProvider templateData={templateData}>
+            <div className="min-h-screen">
+              <AnalyticsScopeProvider name={"header"}>
+                <Header _site={_site} verticalKey={verticalKey} />
+              </AnalyticsScopeProvider>
+              <StateManager>{children}</StateManager>{" "}
+              <AnalyticsScopeProvider name={"footer"}>
+                <Footer _site={_site} />
+              </AnalyticsScopeProvider>
+            </div>
+          </AnalyticsProvider>
+        </SearchHeadlessProvider>
+      </LocationsProvider>
     </MyContextProvider>
   );
 };

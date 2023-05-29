@@ -71,3 +71,26 @@ h2 {
 .resCntr span:nth-child(5) {
   display: none;
 }
+
+@responsive {
+  .univLocMap {
+    display: contents;
+  }
+  .map-container {
+    display: block;
+  }
+  .univLocMap .map-container {
+    width: 100%;
+    height: 300px;
+  }
+  .univLocMap #map {
+    top: 0;
+    bottom: 0;
+    width: 100% !important;
+  }
+  .mobImg {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
