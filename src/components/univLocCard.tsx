@@ -1,7 +1,8 @@
 import * as React from "react";
 import { CardComponent } from "@yext/search-ui-react";
 import { Location } from "../types/search/locations";
-// import HoursText from "./HoursText";
+import Hours from "./hours";
+import HoursText from "./HoursText";
 
 const metersToMiles = (meters: number) => {
   const miles = meters * 0.000621371;
@@ -9,7 +10,7 @@ const metersToMiles = (meters: number) => {
 };
 
 const UnivLocationCard: CardComponent<Location> = ({ result }) => {
-  const { address } = result.rawData;
+  const { hours, address } = result.rawData;
 
   var gmaps = "https://www.google.com/maps/dir/?api=1&destination=";
   var gmapsAddress = gmaps.concat(
@@ -46,14 +47,9 @@ const UnivLocationCard: CardComponent<Location> = ({ result }) => {
               {result.rawData.mainPhone}
             </div>
           </div>
-          {/* <div>
-            {hours && (
-              <HoursText
-                hours={hours}
-                timezone={result.rawData.timezone}
-              ></HoursText>
-            )}
-          </div> */}
+          <div>
+            {hours && <HoursText document={result.rawData}></HoursText>}
+          </div>
           <div className="mt-4 flex flex-col space-y-2">
             <a
               target="_blank"
