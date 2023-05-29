@@ -1,8 +1,7 @@
 import * as React from "react";
 import { CardComponent } from "@yext/search-ui-react";
 import { Location } from "../types/search/locations";
-import Hours from "./hours";
-import HoursText from "./HoursText";
+// import HoursText from "./HoursText";
 
 const metersToMiles = (meters: number) => {
   const miles = meters * 0.000621371;
