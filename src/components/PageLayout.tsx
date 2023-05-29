@@ -12,6 +12,7 @@ import {
   provideHeadless,
 } from "@yext/search-headless-react";
 import { config } from "../config/searchConfig";
+import { MyContextProvider } from "../context/context";
 
 type Props = {
   title?: string;
@@ -30,19 +31,22 @@ const PageLayout = ({
   templateData,
 }: Props) => {
   return (
-    <SearchHeadlessProvider searcher={searcher}>
-      <AnalyticsProvider templateData={templateData}>
-        <div className="min-h-screen">
-          <AnalyticsScopeProvider name={"header"}>
-            <Header _site={_site} verticalKey={verticalKey} />
-          </AnalyticsScopeProvider>
-          <StateManager>{children}</StateManager>
-          <AnalyticsScopeProvider name={"footer"}>
-            <Footer _site={_site} />
-          </AnalyticsScopeProvider>
-        </div>
-      </AnalyticsProvider>
-    </SearchHeadlessProvider>
+    <MyContextProvider>
+      {" "}
+      <SearchHeadlessProvider searcher={searcher}>
+        <AnalyticsProvider templateData={templateData}>
+          <div className="min-h-screen">
+            <AnalyticsScopeProvider name={"header"}>
+              <Header _site={_site} verticalKey={verticalKey} />
+            </AnalyticsScopeProvider>
+            <StateManager>{children}</StateManager>{" "}
+            <AnalyticsScopeProvider name={"footer"}>
+              <Footer _site={_site} />
+            </AnalyticsScopeProvider>
+          </div>
+        </AnalyticsProvider>
+      </SearchHeadlessProvider>
+    </MyContextProvider>
   );
 };
 const StateManager = ({ children }: { children: React.ReactNode }) => {

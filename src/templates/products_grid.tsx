@@ -22,13 +22,14 @@ import "../index.css";
 import SearchResults from "../components/SearchResults";
 import PageLayout from "../components/PageLayout";
 import ProductCard from "../components/product/productcard";
+import { useMyContext } from "../context/context";
 
 export const config: TemplateConfig = {
-  name: "products-grid",
+  name: "product-grid",
 };
 
 export const getPath: GetPath<TemplateProps> = () => {
-  return "products-grid";
+  return "product-grid";
 };
 
 export const getHeadConfig: GetHeadConfig<

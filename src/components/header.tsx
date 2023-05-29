@@ -9,48 +9,36 @@ import {
 } from "@yext/search-ui-react";
 import {
   provideHeadless,
+  useSearchActions,
   useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
 import { config } from "../config/searchConfig";
 import Product from "../types/products";
 import { useEffect, useState } from "react";
+import { useMyContext } from "../context/context";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Products", href: "/products-grid" },
+  { name: "Products", href: "/product-grid" },
   { name: "Locations Directory", href: "/locations" },
   { name: "Support", href: "/faq-list" },
 ];
 
 export default function Header({ _site }: any) {
   const state = useSearchState((state) => state.vertical.verticalKey);
+  const searchActions = useSearchActions();
+  const { setPromoData } = useMyContext();
   const [path, setPath] = useState("");
   useEffect(() => {
     const currentPath = window.location.pathname;
     setPath(currentPath);
     return () => {};
   }, []);
-
   const entityPreviewSearcher = provideHeadless({
     ...config,
     headlessId: "entity-preview-searcher",
   });
-
-  const renderProductPreview = (product: Product): JSX.Element => {
-    const numThumbnails = product.primaryPhoto?.image.thumbnails?.length || 0;
-    const productThumbnail =
-      product.primaryPhoto?.image.thumbnails?.[numThumbnails - 1];
-
-    return (
-      <div className="flex flex-col items-center cursor-pointer hover:bg-gray-100 ">
-        {productThumbnail && (
-          <img className="w-32" src={productThumbnail.url} />
-        )}
-        <div className="font-semibold pl-3">{product.name}</div>
-      </div>
-    );
-  };
 
   const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading: boolean,
@@ -70,7 +58,7 @@ export default function Header({ _site }: any) {
 
     return productResults ? (
       <div className="grid grid-cols-4 px-8">
-        {productResults.map((result, i) => (
+        {productResults.map((result) => (
           <DropdownItem
             key={result.id}
             value={result.name}
@@ -100,18 +88,54 @@ export default function Header({ _site }: any) {
   };
 
   const handleSearch: onSearchFunc = (searchEventData) => {
-    console.log(searchEventData);
     const { query } = searchEventData;
-
+    const path = window.location.pathname;
     const queryParams = new URLSearchParams(window.location.search);
+    console.log(["/index", undefined, "/"].includes(path));
 
     if (query) {
       queryParams.set("query", query);
     } else {
       queryParams.delete("query");
     }
-    window.location.href = `/index?${queryParams.toString()}`;
+    ["/index", undefined, "/"].includes(path)
+      ? (query && searchActions.setQuery(query),
+        searchActions.setUniversal(),
+        searchActions.executeUniversalQuery())
+      : path === "/product-grid"
+      ? (searchActions.setUniversal(),
+        query && searchActions.setQuery(query),
+        searchActions.setUniversal(),
+        searchActions
+          .executeUniversalQuery()
+          .then((res) =>
+            res?.verticalResults[0].verticalKey === "promotion"
+              ? setPromoData(res)
+              : setPromoData("")
+          )
+          .then(() => {
+            searchActions.setVertical("products");
+            query && searchActions.setQuery(query);
+            searchActions.executeVerticalQuery();
+          }))
+      : path.includes("products") &&
+        (window.location.href = `/index?${queryParams.toString()}`);
   };
+
+  // const handleSearch: onSearchFunc = (searchEventData) => {
+  //   const { query } = searchEventData;
+
+  //   const queryParams = new URLSearchParams(window.location.search);
+  //   console.log("inn");
+
+  //   if (query) {
+  //     queryParams.set("query", query);
+  //   } else {
+  //     queryParams.delete("query");
+  //   }
+  //   window.location.href = `/index?${queryParams.toString()}`;
+  // };
+
   return (
     <header>
       <nav className="mx-auto  px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -134,7 +158,7 @@ export default function Header({ _site }: any) {
           </div>
           <div className="ml-10 space-x-4 flex-1">
             {!state || state === "products" ? (
-              path && path.includes("products") ? (
+              path && !path.includes("product-grid") ? (
                 <SearchBar
                   hideRecentSearches={true}
                   customCssClasses={{ searchBarContainer: "!mb-0" }}
@@ -158,6 +182,7 @@ export default function Header({ _site }: any) {
                     universalLimit: { products: 4 },
                     entityPreviewsDebouncingTime: 300,
                   }}
+                  onSearch={handleSearch}
                 />
               )
             ) : (

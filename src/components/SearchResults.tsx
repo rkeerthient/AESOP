@@ -1,34 +1,23 @@
-import {
-  Result,
-  provideHeadless,
-  useSearchActions,
-  VerticalResults as VerticalResultsData,
-} from "@yext/search-headless-react";
+import { useSearchActions } from "@yext/search-headless-react";
 import {
   AppliedFilters,
-  DropdownItem,
-  FocusedItemData,
   LocationBias,
   Pagination,
-  RenderEntityPreviews,
-  SearchBar,
-  StandardCard,
   StandardFacets,
-  VerticalResults,
+  VerticalResults as VR,
   DirectAnswer,
   ResultsCount,
   SpellCheck,
   UniversalResults,
 } from "@yext/search-ui-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CardComponent } from "@yext/answers-react-components";
-import Product from "../types/products";
-import { config } from "../config/searchConfig";
 import * as React from "react";
 import ProductCard from "./product/productcard";
 import HelpArticlesCard from "./HelpArticlesCard";
 import LocationCard from "./LocationCard";
 import PromoCard from "./promoCard";
+import { useMyContext } from "../context/context";
 
 type Props = {
   verticalKey?: string;
@@ -42,12 +31,15 @@ const SearchResults = ({
   queryTerm,
   resultsCss,
 }: Props) => {
-  const searchActions = useSearchActions();
+  const { promoData } = useMyContext();
+  console.log(JSON.stringify(promoData));
 
+  const searchActions = useSearchActions();
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");
     query && searchActions.setQuery(query);
+
     verticalKey
       ? (searchActions.setVertical(verticalKey),
         searchActions.executeVerticalQuery())
@@ -88,6 +80,14 @@ const SearchResults = ({
 
   return (
     <div className="max-w-7xl mx-auto mt-4">
+      {promoData && promoData.verticalResults && (
+        <div className="mb-8">
+          {" "}
+          <PromoCard
+            result={promoData.verticalResults[0].results[0]}
+          ></PromoCard>
+        </div>
+      )}
       {verticalKey != "" ? (
         <div className="flex">
           <div
@@ -101,7 +101,7 @@ const SearchResults = ({
               <ResultsCount />
               <AppliedFilters />
             </div>
-            <VerticalResults
+            <VR
               CardComponent={cardType}
               customCssClasses={{
                 verticalResultsContainer: resultsCss,

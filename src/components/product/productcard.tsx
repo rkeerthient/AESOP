@@ -16,11 +16,11 @@ const ProductCard = (props: CardProps<Product>) => {
           />
         )}
         <div className="flex flex-col space-y-8 text-center text-sm resCntr">
-          <div className="flex flex-col space-y-3 h-20">
+          <div className="flex flex-col space-y-3 mt-4">
             <div className="text-gray-800 font-bold">{result.name}</div>
-            <div className="text-gray-600 font-light">
+            {/* <div className="text-gray-600 font-light">
               {result.rawData.price?.currencyCode} {result.rawData.price?.value}
-            </div>
+            </div> */}
           </div>
           {result.rawData.c_suitedTo && (
             <span className="dummy">

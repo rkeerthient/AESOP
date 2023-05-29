@@ -4,7 +4,7 @@ import { CardProps } from "@yext/search-ui-react";
 
 const PromoCard = (props: CardProps<Ce_promotion>) => {
   const { result } = props;
-  console.log(JSON.stringify(result.rawData));
+
   return (
     <div className="w-full ">
       <div className="relative">
