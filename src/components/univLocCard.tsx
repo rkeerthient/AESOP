@@ -2,6 +2,7 @@ import * as React from "react";
 import { CardComponent } from "@yext/search-ui-react";
 import { Location } from "../types/search/locations";
 import Hours from "./hours";
+import HoursText from "./HoursText";
 
 const metersToMiles = (meters: number) => {
   const miles = meters * 0.000621371;
@@ -24,35 +25,54 @@ const UnivLocationCard: CardComponent<Location> = ({ result }) => {
   var gmapsLink = gmapsAddress.concat('"');
 
   return (
-    <div className="p-4 border border-transparent hover:border hover:border-gray-400 hovCards">
-      <a
-        target="_blank"
-        href={`${result.rawData.slug}`}
-        className="space-y-6 grid grid-cols-3"
-      >
-        <div>
-          <h1 className="text-slate-900 text-3xl">{result.rawData.name}</h1>
+    <div className="p-4 border-b  hover:border hover:border-gray-400 hovCards  ">
+      <div className="flex w-full flex-col">
+        <div className="flex justify-between">
+          <div className="text-slate-900 text-2xl">{result.rawData.name}</div>
           <div>
-            <p className="text-sm text-slate-700">{address.line1}</p>
-            <p className="text-sm text-slate-700">
-              {address.city}, {address.region}, {address.postalCode}{" "}
-            </p>
             <p className="mt-1 text-xs italic text-slate-500">
               {metersToMiles(result.distanceFromFilter ?? 0)} mi
             </p>
           </div>
         </div>
-        <div>{hours && <Hours title={""} hours={hours}></Hours>} </div>
-        <div className="mt-4">
-          <a
-            target="_blank"
-            href={gmapsLink}
-            className="CTA-1 !px-6 !py-3 !text-sm hover:underline"
-          >
-            Get Directions
-          </a>
+        <div className="flex flex-row justify-between">
+          <div className=" space-y-3">
+            <div>
+              <p className="text-sm text-slate-700">{address.line1}</p>
+              <p className="text-sm text-slate-700">
+                {address.city}, {address.region}, {address.postalCode}{" "}
+              </p>
+            </div>
+            <div className="text-sm text-slate-700 font-semibold">
+              {result.rawData.mainPhone}
+            </div>
+          </div>
+          <div>
+            {hours && (
+              <HoursText
+                hours={hours}
+                timezone={result.rawData.timezone}
+              ></HoursText>
+            )}
+          </div>
+          <div className="mt-4 flex flex-col space-y-2">
+            <a
+              target="_blank"
+              href={gmapsLink}
+              className="CTA-1 !w-fit !px-6 !py-3 !text-sm "
+            >
+              Get Directions
+            </a>
+            <a
+              target="_blank"
+              href={result.rawData.slug}
+              className="CTA-1 !w-fit !px-6 !py-3 !text-sm "
+            >
+              View Store Details
+            </a>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };

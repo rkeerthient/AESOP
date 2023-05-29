@@ -1,7 +1,5 @@
 import * as React from "react";
-const HoursText = ({ document }: any) => {
-  const { hours, timezone } = document;
-
+const HoursText = ({ hours, timezone }: any) => {
   const getStatus = (currentDay: any, currentTime: any, hours: any) => {
     if (hours[currentDay.toLowerCase()].isClosed)
       return {
