@@ -25,7 +25,7 @@ const UnivLocationCard: CardComponent<Location> = ({ result }) => {
   var gmapsLink = gmapsAddress.concat('"');
 
   return (
-    <div className="p-4 border-b  hover:border hover:border-gray-400 hovCards  ">
+    <div className="p-4 border-transparent border hover:border hover:border-gray-400 hovCards  ">
       <div className="flex w-full flex-col">
         <div className="flex justify-between">
           <div className="text-slate-900 text-2xl">{result.rawData.name}</div>
@@ -59,14 +59,14 @@ const UnivLocationCard: CardComponent<Location> = ({ result }) => {
             <a
               target="_blank"
               href={gmapsLink}
-              className="CTA-1 !w-fit !px-6 !py-3 !text-sm "
+              className="text-sm text-center bg-gray-800 text-white py-4 px-8"
             >
               Get Directions
             </a>
             <a
               target="_blank"
               href={result.rawData.slug}
-              className="CTA-1 !w-fit !px-6 !py-3 !text-sm "
+              className="text-sm text-center bg-gray-800 text-white py-4 px-8"
             >
               View Store Details
             </a>
